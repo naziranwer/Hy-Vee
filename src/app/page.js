@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import axios from "axios";
-import { getName } from 'country-list';
+import { getName } from "country-list";
 
 export default function Home() {
   const [name, setName] = useState("");
@@ -25,6 +25,7 @@ export default function Home() {
 
       setResult({
         age: ageResponse.data.age,
+        name: ageResponse.data.name,
         gender: genderResponse.data.gender,
         countries: nationalityResponse.data.country.sort(
           (a, b) => b.probability - a.probability
@@ -45,7 +46,9 @@ export default function Home() {
         </h1>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-lg font-semibold text-gray-800 mb-2">Enter a name:</label>
+            <label className="block text-lg font-semibold text-gray-800 mb-2">
+              Enter a name:
+            </label>
             <input
               type="text"
               value={name}
@@ -65,18 +68,35 @@ export default function Home() {
           </button>
         </form>
 
-        {error && <div className="mt-4 text-red-600 text-center font-medium">{error}</div>}
+        {error && (
+          <div className="mt-4 text-red-600 text-center font-medium">
+            {error}
+          </div>
+        )}
 
         {result && (
           <div className="mt-6 text-center bg-gray-50 p-6 rounded-lg shadow-inner">
-            <h2 className="text-2xl font-bold mb-4 text-gray-900">Results for {name}</h2>
-            <p className="text-lg font-semibold mb-2">Age: <span className="font-medium text-blue-700">{result.age}</span></p>
-            <p className="text-lg font-semibold mb-2">Gender: <span className="font-medium text-blue-700">{result.gender}</span></p>
-            <h3 className="mt-4 text-lg font-semibold text-gray-900">Probable Nationalities:</h3>
+            <h2 className="text-2xl font-bold mb-4 text-gray-900">
+              Results for {result.name}
+            </h2>
+            <p className="text-lg font-semibold mb-2">
+              Age:{" "}
+              <span className="font-medium text-blue-700">{result.age}</span>
+            </p>
+            <p className="text-lg font-semibold mb-2">
+              Gender:{" "}
+              <span className="font-medium text-blue-700">{result.gender}</span>
+            </p>
+            <h3 className="mt-4 text-lg font-semibold text-gray-900">
+              Probable Nationalities:
+            </h3>
             <ul className="list-disc list-inside mt-2 space-y-1">
               {result.countries.map((country, index) => (
                 <li key={index} className="text-lg">
-                  {getName(country.country_id)} <span className="text-blue-700">({(country.probability * 100).toFixed(2)}%)</span>
+                  {getName(country.country_id)}{" "}
+                  <span className="text-blue-700">
+                    ({(country.probability * 100).toFixed(2)}%)
+                  </span>
                 </li>
               ))}
             </ul>
@@ -86,4 +106,3 @@ export default function Home() {
     </div>
   );
 }
-
