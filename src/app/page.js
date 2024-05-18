@@ -27,6 +27,7 @@ export default function Home() {
         age: ageResponse.data.age,
         name: ageResponse.data.name,
         gender: genderResponse.data.gender,
+        name: ageResponse.data.name,
         countries: nationalityResponse.data.country.sort(
           (a, b) => b.probability - a.probability
         ),
@@ -76,20 +77,10 @@ export default function Home() {
 
         {result && (
           <div className="mt-6 text-center bg-gray-50 p-6 rounded-lg shadow-inner">
-            <h2 className="text-2xl font-bold mb-4 text-gray-900">
-              Results for {result.name}
-            </h2>
-            <p className="text-lg font-semibold mb-2">
-              Age:{" "}
-              <span className="font-medium text-blue-700">{result.age}</span>
-            </p>
-            <p className="text-lg font-semibold mb-2">
-              Gender:{" "}
-              <span className="font-medium text-blue-700">{result.gender}</span>
-            </p>
-            <h3 className="mt-4 text-lg font-semibold text-gray-900">
-              Probable Nationalities:
-            </h3>
+            <h2 className="text-2xl font-bold mb-4 text-gray-900">Results for {result.name}</h2>
+            <p className="text-lg font-semibold mb-2">Age: <span className="font-medium text-blue-700">{result.age}</span></p>
+            <p className="text-lg font-semibold mb-2">Gender: <span className="font-medium text-blue-700">{result.gender}</span></p>
+            <h3 className="mt-4 text-lg font-semibold text-gray-900">Probable Nationalities:</h3>
             <ul className="list-disc list-inside mt-2 space-y-1">
               {result.countries.map((country, index) => (
                 <li key={index} className="text-lg">
