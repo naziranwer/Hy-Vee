@@ -26,6 +26,7 @@ export default function Home() {
       setResult({
         age: ageResponse.data.age,
         gender: genderResponse.data.gender,
+        name: ageResponse.data.name,
         countries: nationalityResponse.data.country.sort(
           (a, b) => b.probability - a.probability
         ),
